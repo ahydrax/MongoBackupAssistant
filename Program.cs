@@ -5,8 +5,9 @@ namespace MongoBackupAssistant
     public static class Program
     {
         public static void Main(string[] args)
-            => Parser.Default.ParseArguments<DumpOptions, RestoreOptions>(args)
-                .WithParsed<DumpOptions>(x => MongoDump.Dump(x))
-                .WithParsed<RestoreOptions>(x => MongoRestore.Restore(x));
+            => Parser.Default.ParseArguments<DumpOptions, RestoreOptions, CopyOptions>(args)
+                .WithParsed<DumpOptions>(MongoDump.Dump)
+                .WithParsed<RestoreOptions>(MongoRestore.Restore)
+                .WithParsed<CopyOptions>(MongoCopy.Copy);
     }
 }

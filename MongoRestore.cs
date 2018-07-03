@@ -16,8 +16,7 @@ namespace MongoBackupAssistant
 
             var progressBarOptions = new ProgressBarOptions
             {
-                ProgressCharacter = '|',
-                ProgressBarOnBottom = true
+                ProgressCharacter = '|'
             };
 
             using (var pBar = new ProgressBar(fileNames.Length, "Starting...", progressBarOptions))
