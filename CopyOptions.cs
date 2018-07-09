@@ -34,5 +34,8 @@ namespace MongoBackupAssistant
 
         [Option("query")]
         public string Query { get; set; }
+
+        [Option("drop")]
+        public bool Drop { get; set; }
     }
 }
