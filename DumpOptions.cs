@@ -5,18 +5,15 @@ namespace MongoBackupAssistant
     [Verb("dump")]
     public class DumpOptions
     {
-        [Option('b', "dumpBinaryPath", HelpText = "Path to mongodump binary", Required = true)]
-        public string MongoDumpPath { get; set; }
+        [Option('b', "dumpBin", HelpText = "Path to mongodump binary", Required = true)]
+        public string MongoDumpBinary { get; set; }
 
-        [Option('q', "queryFile", HelpText = "Path to query file", Required = true)]
-        public string QueryFile { get; set; }
-
-        [Option('p', "prefix", HelpText = "Backup archives prefix name", Required = true)]
-        public string PrefixName { get; set; }
+        [Option('q', "query", HelpText = "Path to query file", Required = true)]
+        public string Query { get; set; }
 
         [Option('o', "out", HelpText = "Backup path", Required = true)]
         public string OutputPath { get; set; }
-        
+
         [Option('h', "host", HelpText = "Database host", Required = true)]
         public string Host { get; set; }
 

@@ -5,11 +5,8 @@ namespace MongoBackupAssistant
     [Verb("restore")]
     public class RestoreOptions
     {
-        [Option('b', "restoreBinaryPath", HelpText = "Path to mongodump binary", Required = true)]
-        public string MongoRestorePath { get; set; }
-
-        [Option('p', "prefix", HelpText = "Backup archives prefix name", Required = true)]
-        public string PrefixName { get; set; }
+        [Option('b', "restoreBin", HelpText = "Path to mongodump binary", Required = true)]
+        public string MongoRestoreBinary { get; set; }
 
         [Option('i', "input", HelpText = "Backup path", Required = true)]
         public string InputPath { get; set; }
@@ -22,5 +19,8 @@ namespace MongoBackupAssistant
 
         [Option('n', "name", HelpText = "Database name", Required = true)]
         public string DatabaseName { get; set; }
+
+        [Option("drop")]
+        public bool Drop { get; set; }
     }
 }
