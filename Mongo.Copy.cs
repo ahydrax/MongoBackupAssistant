@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using MongoDB.Driver;
 
 namespace MongoBackupAssistant
 {
@@ -8,26 +9,18 @@ namespace MongoBackupAssistant
         {
             var dumpOptions = new DumpOptions
             {
-                Host = options.FromHost,
-                Port = options.FromPort,
-                Username = options.FromUsername,
-                Password = options.FromPassword,
-                DatabaseName = options.FromDatabase,
+                Uri = options.FromUri,
                 Query = options.Query,
                 OutputPath = options.Path,
                 MongoDumpBinary = options.MongoDumpBinary
             };
             Dump(dumpOptions);
 
+            var dataBaseName = MongoUrl.Create(options.FromUri).DatabaseName;
             var restoreOptions = new RestoreOptions
             {
-                Host = options.ToHost,
-                Port = options.ToPort,
-                Username = options.ToDatabase,
-                Password = options.ToPassword,
-                DatabaseName = options.ToDatabase,
-                Drop = options.Drop,
-                InputPath = Path.Combine(options.Path, options.FromDatabase),
+                Uri = options.ToUri,
+                InputPath = Path.Combine(options.Path, dataBaseName),
                 MongoRestoreBinary = options.MongoRestoreBinary
             };
             Restore(restoreOptions);

@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using MongoDB.Driver;
 
 namespace MongoBackupAssistant
 {
@@ -10,10 +11,7 @@ namespace MongoBackupAssistant
         public static void Restore(RestoreOptions options)
         {
             var fileNames = Directory.GetFiles(options.InputPath, "*.bson.gz");
-            var restoreCommandLineBase = $"--host {options.Host} --port {options.Port} --db {options.DatabaseName} --gzip";
-
-            if (!string.IsNullOrEmpty(options.Username) && !string.IsNullOrEmpty(options.Password))
-                restoreCommandLineBase += $"--username {options.Username} --password {options.Password}";
+            var restoreCommandLineBase = $"--uri {options.Uri} --gzip";
 
             if (options.Drop)
             {
