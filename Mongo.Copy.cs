@@ -10,6 +10,8 @@ namespace MongoBackupAssistant
             {
                 Host = options.FromHost,
                 Port = options.FromPort,
+                Username = options.FromUsername,
+                Password = options.FromPassword,
                 DatabaseName = options.FromDatabase,
                 Query = options.Query,
                 OutputPath = options.Path,
@@ -21,6 +23,8 @@ namespace MongoBackupAssistant
             {
                 Host = options.ToHost,
                 Port = options.ToPort,
+                Username = options.ToDatabase,
+                Password = options.ToPassword,
                 DatabaseName = options.ToDatabase,
                 Drop = options.Drop,
                 InputPath = Path.Combine(options.Path, options.FromDatabase),

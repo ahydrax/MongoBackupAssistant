@@ -20,6 +20,12 @@ namespace MongoBackupAssistant
         [Option('n', "name", HelpText = "Database name", Required = true)]
         public string DatabaseName { get; set; }
 
+        [Option('u', "user", HelpText = "Username", Required = false)]
+        public string Username { get; set; }
+
+        [Option('w', "pass", HelpText = "Password", Required = false)]
+        public string Password { get; set; }
+
         [Option("drop")]
         public bool Drop { get; set; }
     }

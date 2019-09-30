@@ -12,6 +12,9 @@ namespace MongoBackupAssistant
             var fileNames = Directory.GetFiles(options.InputPath, "*.bson.gz");
             var restoreCommandLineBase = $"--host {options.Host} --port {options.Port} --db {options.DatabaseName} --gzip";
 
+            if (!string.IsNullOrEmpty(options.Username) && !string.IsNullOrEmpty(options.Password))
+                restoreCommandLineBase += $"--username {options.Username} --password {options.Password}";
+
             if (options.Drop)
             {
                 restoreCommandLineBase += $" --drop";

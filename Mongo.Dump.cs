@@ -12,12 +12,15 @@ namespace MongoBackupAssistant
             var targetPath = Path.Combine(options.OutputPath, options.DatabaseName);
             var dumpCommandLineBase = $"--host {options.Host} --port {options.Port} --db {options.DatabaseName} --gzip --out {options.OutputPath}";
 
+            if (!string.IsNullOrEmpty(options.Username) && !string.IsNullOrEmpty(options.Password))
+                dumpCommandLineBase += $"--username {options.Username} --password {options.Password}";
+
             if (!string.IsNullOrWhiteSpace(options.Query))
             {
                 dumpCommandLineBase += $" --query \"{options.Query}\"";
             }
 
-            var uri = MongoUrl.Create($"mongodb://{options.Host}:{options.Port}/{options.DatabaseName}");
+            var uri = MongoUrl.Create(GetConnectionString(options));
             var client = new MongoClient(uri);
             var db = client.GetDatabase(uri.DatabaseName);
 
@@ -50,6 +53,13 @@ namespace MongoBackupAssistant
                     throw new Exception($"Failed to dump collection {collectionName}");
                 }
             }
+        }
+
+        private static string GetConnectionString(DumpOptions options)
+        {
+            if (!string.IsNullOrEmpty(options.Username) && !string.IsNullOrEmpty(options.Password))
+                return $"mongodb://{options.Username}:{options.Password}@{options.Host}:{options.Port}/{options.DatabaseName}";
+            return $"mongodb://{options.Host}:{options.Port}/{options.DatabaseName}";
         }
     }
 }

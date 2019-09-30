@@ -17,6 +17,12 @@ namespace MongoBackupAssistant
         [Option("fromPort", Default = 27017)]
         public int FromPort { get; set; }
 
+        [Option("fromUser", Required = false)]
+        public string FromUsername { get; set; }
+
+        [Option("fromPass", Required = false)]
+        public string FromPassword { get; set; }
+
         [Option("fromDb", Required = true)]
         public string FromDatabase { get; set; }
 
@@ -28,6 +34,12 @@ namespace MongoBackupAssistant
 
         [Option("toDb", Required = true)]
         public string ToDatabase { get; set; }
+
+        [Option("toUser", Required = false)]
+        public string ToUsername { get; set; }
+
+        [Option("toPass", Required = false)]
+        public string ToPassword { get; set; }
 
         [Option("path", Required = true)]
         public string Path { get; set; }
