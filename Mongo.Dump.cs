@@ -9,15 +9,15 @@ namespace MongoBackupAssistant
     {
         public static void Dump(DumpOptions options)
         {
-            var targetPath = Path.Combine(options.OutputPath, options.DatabaseName);
-            var dumpCommandLineBase = $"--host {options.Host} --port {options.Port} --db {options.DatabaseName} --gzip --out {options.OutputPath}";
+            var uri = MongoUrl.Create(options.Uri);
+            var targetPath = Path.Combine(options.OutputPath, uri.DatabaseName);
+            var dumpCommandLineBase = $"--uri {options.Uri} --gzip --out {options.OutputPath}";
 
             if (!string.IsNullOrWhiteSpace(options.Query))
             {
                 dumpCommandLineBase += $" --query \"{options.Query}\"";
             }
 
-            var uri = MongoUrl.Create($"mongodb://{options.Host}:{options.Port}/{options.DatabaseName}");
             var client = new MongoClient(uri);
             var db = client.GetDatabase(uri.DatabaseName);
 
